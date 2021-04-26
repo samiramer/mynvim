@@ -6,11 +6,25 @@ ENV SHELL=/bin/bash
 # Install vim, python and other utils
 RUN apt-get update \
     && apt-get install -y \
+    tar \
     wget \
     curl \
     vim \
     git \
-    && rm -rf /var/lib/apt/lists/*
+    python3 \
+    python3-pip \
+    python3-venv \
+    && rm -rf /var/lib/apt/lists/* \
+    && python3 -m pip install --upgrade pip
+
+# Install nodejs using nvm
+ENV NVM_DIR=/opt/nvm
+ENV PROFILE=/etc/bash.bashrc
+RUN mkdir -p /opt/nvm \
+    && wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash \
+    && . $NVM_DIR/nvm.sh \
+    && nvm install --lts \
+    && nvm use --lts
 
 # Install neovim (fancy Vim)
 RUN mkdir /opt/nvim \
