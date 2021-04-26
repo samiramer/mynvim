@@ -10,7 +10,7 @@ RUN apt-get update \
     curl \
     vim \
     git \
-    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install neovim (fancy Vim)
 RUN mkdir /opt/nvim \
